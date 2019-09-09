@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="winner">Winner</string>
+    <string name="action_reset">Reset</string>
+    <string name="cButton">C</string>
+    <string name="plusMinusButton">+/-</string>
+    <string name="backSlashButton"> BackSlash </string>
+    <string name="divisionButton"> / </string>
+    <string name="sevenButton"> 7 </string>
+    <string name="eightButton"> 8 </string>
+    <string name="nineButton"> 9 </string>
+    <string name="multiplicationButton"> * </string>
+    <string name="fourButton"> 4 </string>
+    <string name="fiveButton"> 5 </string>
+    <string name="sixButton"> 6 </string>
+    <string name="minusButton"> - </string>
+    <string name="oneButton"> 1 </string>
+    <string name="twoButton"> 2 </string>
+    <string name="threeButton"> 3 </string>
+    <string name="additionButton"> + </string>
+    <string name="zeroButton"> 0 </string>
+    <string name="decimalButton"> . </string>
+    <string name="equalButton"> = </string>
+
+
+
+</resources>
