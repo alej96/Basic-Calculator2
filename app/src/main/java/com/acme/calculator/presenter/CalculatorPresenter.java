@@ -3,20 +3,24 @@ package com.acme.calculator.presenter;
 import com.acme.calculator.model.Board;
 import com.acme.calculator.model.Player;
 import com.acme.calculator.view.CalculatorView;
+import com.acme.calculator.model.Screen;
 
 public class CalculatorPresenter implements Presenter {
 
     private CalculatorView view;
-    private Board model;
+    private Screen model;
+    String num1;
+    String num2;
+    String operation;
 
     public CalculatorPresenter(CalculatorView view) {
         this.view = view;
-        this.model = new Board();
+        this.model = new Screen();
     }
 
     @Override
     public void onCreate() {
-        model = new Board();
+        model = new Screen();
     }
 
     @Override
@@ -34,21 +38,23 @@ public class CalculatorPresenter implements Presenter {
 
     }
 
-    public void onButtonSelected(int row, int col) {
-        Player playerThatMoved = model.mark(row, col);
+    //this pesudo code...operads
 
-        if(playerThatMoved != null) {
-            view.setButtonText(row, col, playerThatMoved.toString());
-
-            if (model.getWinner() != null) {
-                view.showWinner(playerThatMoved.toString());
-            }
-        }
+    public void onButtonSelected(String button) {
+//        Player playerThatMoved = model.mark(row, col);
+//
+//        if(playerThatMoved != null) {
+//            view.setButtonText(row, col, playerThatMoved.toString());
+//
+//            if (model.getWinner() != null) {
+//                view.showCalculations(playerThatMoved.toString());
+//            }
+//        }
     }
 
     public void onResetSelected() {
-        view.clearWinnerDisplay();
-        view.clearButtons();
+     //   view.clearWinnerDisplay();
+        view.clearScreen();
         model.restart();
     }
 

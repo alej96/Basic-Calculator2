@@ -12,166 +12,143 @@
     android:gravity="center_horizontal"
     tools:context="com.acme.calculator.view.CalculatorActivity">
 
-    <LinearLayout
-        android:id="@+id/winnerPlayerViewGroup"
-        android:layout_width="142dp"
-        android:layout_height="203dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/winnerPlayerLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textSize="40sp"
-            tools:text="X" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/winner"
-            android:textSize="30sp" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/calculationResults"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:visibility="visible"
+        tools:text="0"
+        android:gravity = "right"
+        tools:visibility="visible" />
 
     <GridLayout
         android:id="@+id/buttonGrid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="322dp"
+        android:layout_height="454dp"
         android:columnCount="4"
         android:rowCount="5">
 
         <Button
-            android:tag="cButton"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/cButton"
+            android:onClick="onCellClicked"
+            android:tag="commandC"
+            android:text="@string/cButton"
+            android:orderInCategory="100"
             />
 
         <Button
-            android:tag="plusMinusButton"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/plusMinusButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="operator*-1"
+            android:text="@string/plusMinusButton" />
 
         <Button
-            android:tag="backSlashButton"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/backSlashButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="commandBackSlash"
+            android:text="@string/backSlashButton" />
 
         <Button
-            android:tag="divisionButton"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/divisionButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="operator/"
+            android:text="@string/divisionButton" />
 
         <Button
-            android:tag="07"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/sevenButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="number7"
+            android:text="@string/sevenButton" />
 
         <Button
-            android:tag="08"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/eightButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="number8"
+            android:text="@string/eightButton" />
 
         <Button
-            android:tag="09"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/nineButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="number9"
+            android:text="@string/nineButton" />
 
         <Button
-            android:tag="multiplication"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/multiplicationButton"
-            />
+            android:onClick="onCellClicked"
+            android:tag="operator*"
+            android:text="@string/multiplicationButton" />
 
         <Button
-            android:tag="04"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/fourButton"
-            />
-        <Button
-            android:tag="05"
             android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/fiveButton"
-            />
-        <Button
-        android:tag="06"
-        android:onClick="onCellClicked"
-        style="@style/calculatorbutton"
-            android:text = "@string/sixButton"
-        />
+            android:tag="number4"
+            android:text="@string/fourButton" />
 
         <Button
-            android:tag="minus"
-            android:onClick="onCellClicked"
             style="@style/calculatorbutton"
-            android:text = "@string/minusButton"
-            />
-        <Button
-            android:tag="01"
             android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/oneButton"
-            />
-        <Button
-            android:tag="02"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/twoButton"
-            />
-        <Button
-            android:tag="03"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/threeButton"
-            />
-        <Button
-            android:tag="addition"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/additionButton"
-            />
-        <Button
-            android:tag="00"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/zeroButton"
-            />
-        <Button
-            android:tag="decimalButton"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/decimalButton"
-            />
-        <Button
-            android:tag="equalButton"
-            android:onClick="onCellClicked"
-            style="@style/calculatorbutton"
-            android:text = "@string/equalButton"
-            />
+            android:tag="number5"
+            android:text="@string/fiveButton" />
 
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="number6"
+            android:text="@string/sixButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="operator-"
+            android:text="@string/minusButton" />
+
+        <Button
+            android:id="@+id/numberOne"
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:text="@string/oneButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="number2"
+            android:text="@string/twoButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="number3"
+            android:text="@string/threeButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="operator+"
+            android:text="@string/additionButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="number0"
+            android:text="@string/zeroButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="operator."
+            android:text="@string/decimalButton" />
+
+        <Button
+            style="@style/calculatorbutton"
+            android:onClick="onCellClicked"
+            android:tag="operator="
+            android:text="@string/equalButton" />
 
 
     </GridLayout>
 
-
-
 </LinearLayout>
+
+

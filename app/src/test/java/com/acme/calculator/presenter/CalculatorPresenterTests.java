@@ -45,19 +45,19 @@ public class CalculatorPresenterTests {
     public void test3inRowAcrossTopForX() {
 
         clickAndAssertValueAt(0,0, "X");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(1,0, "O");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(0,1, "X");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(2,1, "O");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(0,2, "X");
-        verify(view).showWinner("X");
+        verify(view).showCalculations("X");
 
     }
 
@@ -73,22 +73,22 @@ public class CalculatorPresenterTests {
     public void test3inRowDiagonalFromTopLeftToBottomForO() {
 
         clickAndAssertValueAt(0,1, "X");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(0,0, "O");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(2,1, "X");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(1,1, "O");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(0,2, "X");
-        verify(view, never()).showWinner(anyString());
+        verify(view, never()).showCalculations(anyString());
 
         clickAndAssertValueAt(2,2, "O");
-        verify(view).showWinner("O");
+        verify(view).showCalculations("O");
 
     }
 

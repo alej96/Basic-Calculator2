@@ -1,5 +1,6 @@
 package com.acme.calculator.view;
 
+//import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,24 +14,38 @@ import android.widget.TextView;
 
 import com.acme.calculator.R;
 import com.acme.calculator.presenter.CalculatorPresenter;
+//import com.acme.calculator.databinding.ActivityMainBinding;
 
 public class CalculatorActivity extends AppCompatActivity implements CalculatorView {
 
     private static String TAG = CalculatorActivity.class.getName();
 
     private ViewGroup buttonGrid;
-    private View winnerPlayerViewGroup;
-    private TextView winnerPlayerLabel;
+    private View CalculationResults;
+    private TextView resultScreen;
+    private Button clearButton; //C button
+    private Button numberButton;
+   // private TextView winnerPlayerLabel;
 
     CalculatorPresenter presenter = new CalculatorPresenter(this);
+
+    //private ActivityMainBinding binding;
+
+    private static final char ADDITION = '+';
+    private static final char SUBTRACTION = '-';
+    private static final char MULTIPLICATION = '*';
+    private static final char DIVISION = '/';
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("Tag1","here");
+      //  resultScreen.setVisibility(View.VISIBLE);
         setContentView(R.layout.calculator);
-        winnerPlayerLabel = (TextView) findViewById(R.id.winnerPlayerLabel);
-        winnerPlayerViewGroup = findViewById(R.id.winnerPlayerViewGroup);
+//        winnerPlayerLabel = (TextView) findViewById(R.id.calculationResults);
+        resultScreen = (TextView) findViewById(R.id.calculationResults); //display the calcualtions in the screen
         buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
+        clearButton = (Button) findViewById(R.id.action_reset);
         presenter.onCreate();
     }
 
@@ -73,11 +88,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
         Button button = (Button) v;
         String tag = button.getTag().toString();
-        int row = Integer.valueOf(tag.substring(0,1));
-        int col = Integer.valueOf(tag.substring(1,2));
-        Log.i(TAG, "Click Row: [" + row + "," + col + "]");
 
-        presenter.onButtonSelected(row, col);
+        Log.i(TAG, "Tag name:" + tag);
+
+        presenter.onButtonSelected(tag);
 
     }
 
@@ -89,19 +103,22 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         }
     }
 
-    public void clearButtons() {
-        for( int i = 0; i < buttonGrid.getChildCount(); i++ ) {
-            ((Button) buttonGrid.getChildAt(i)).setText("");
-        }
+    //clear screen when press C
+    public void clearScreen() {
+        Log.i("TAG2","Here2");
+        resultScreen.setVisibility(View.VISIBLE);
+        resultScreen.setText("0");
     }
 
-    public void showWinner(String winningPlayerDisplayLabel) {
-        winnerPlayerLabel.setText(winningPlayerDisplayLabel);
-        winnerPlayerViewGroup.setVisibility(View.VISIBLE);
+
+    public void showCalculations(String winningPlayerDisplayLabel) {
+       // winnerPlayerLabel.setText(winningPlayerDisplayLabel);
+        CalculationResults.setVisibility(View.VISIBLE);
     }
+
 
     public void clearWinnerDisplay() {
-        winnerPlayerViewGroup.setVisibility(View.GONE);
-        winnerPlayerLabel.setText("");
+        //CalculationResults.setVisibility(View.GONE);
+        //winnerPlayerLabel.setText("");
     }
 }

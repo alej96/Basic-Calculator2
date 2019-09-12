@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">Calculator 2</string>
     <string name="winner">Winner</string>
     <string name="action_reset">Reset</string>
+
     <string name="cButton">C</string>
     <string name="plusMinusButton">+/-</string>
-    <string name="backSlashButton"> BackSlash </string>
+    <string name="backSlashButton"> &lt;- </string>
     <string name="divisionButton"> / </string>
     <string name="sevenButton"> 7 </string>
     <string name="eightButton"> 8 </string>
