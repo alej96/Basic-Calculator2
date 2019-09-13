@@ -14,17 +14,20 @@ import android.widget.TextView;
 
 import com.acme.calculator.R;
 import com.acme.calculator.presenter.CalculatorPresenter;
+import com.acme.calculator.model.Screen;
 //import com.acme.calculator.databinding.ActivityMainBinding;
 
 public class CalculatorActivity extends AppCompatActivity implements CalculatorView {
 
     private static String TAG = CalculatorActivity.class.getName();
 
+
     private ViewGroup buttonGrid;
     private View CalculationResults;
     private TextView resultScreen;
     private Button clearButton; //C button
     private Button numberButton;
+    Screen model;
    // private TextView winnerPlayerLabel;
 
     CalculatorPresenter presenter = new CalculatorPresenter(this);
@@ -35,6 +38,8 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     private static final char SUBTRACTION = '-';
     private static final char MULTIPLICATION = '*';
     private static final char DIVISION = '/';
+    private static final char DECIMAL = '.';
+    private static final String NEGATIVE = "*-1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +90,19 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     }
 
     public void onCellClicked(View v) {
-
+    //do a if statement to recognize if it a number or operant
         Button button = (Button) v;
         String tag = button.getTag().toString();
 
         Log.i(TAG, "Tag name:" + tag);
-
+        if(tag.startsWith("number"))
+        {
+         //   model.num1.append(); //combine the numbers and make it a screen
+          //  View.textbox.refresh(); //refresh the screen results
+        }else if( tag.startsWith("operator"))
+        {
+          //  model.runCalculations();
+        }
         presenter.onButtonSelected(tag);
 
     }

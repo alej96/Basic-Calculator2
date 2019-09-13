@@ -30,7 +30,7 @@ public class CalculatorPresenterTests {
     }
 
     private void clickAndAssertValueAt(int row, int col, String expectedValue) {
-        presenter.onButtonSelected(row, col);
+        presenter.onButtonSelected(expectedValue);
         verify(view).setButtonText(row, col, expectedValue);
     }
 

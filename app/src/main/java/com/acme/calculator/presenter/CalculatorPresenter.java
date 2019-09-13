@@ -41,6 +41,8 @@ public class CalculatorPresenter implements Presenter {
     //this pesudo code...operads
 
     public void onButtonSelected(String button) {
+
+        //do all calculations (funtion from model and display number/operant in screen!
 //        Player playerThatMoved = model.mark(row, col);
 //
 //        if(playerThatMoved != null) {
