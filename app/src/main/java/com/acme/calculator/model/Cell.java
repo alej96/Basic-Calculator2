@@ -6,13 +6,13 @@ package com.acme.calculator.model;
 
 public class Cell {
 
-    private Player value;
+    private State value;
 
-    public Player getValue() {
+    public State getValue() {
         return value;
     }
 
-    public void setValue(Player value) {
+    public void setValue(State value) {
         this.value = value;
     }
 }

@@ -41,7 +41,7 @@ public class CalculatorTests {
         assertNull(board.getWinner());
 
         board.mark(0,2); // x
-        assertEquals(Player.X, board.getWinner());
+        assertEquals(State.X, board.getWinner());
     }
 
 
@@ -71,7 +71,7 @@ public class CalculatorTests {
         assertNull(board.getWinner());
 
         board.mark(2,2); // o
-        assertEquals(Player.O, board.getWinner());
+        assertEquals(State.O, board.getWinner());
 
     }
 

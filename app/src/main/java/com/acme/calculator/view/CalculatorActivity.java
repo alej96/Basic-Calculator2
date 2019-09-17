@@ -27,20 +27,13 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     private TextView resultScreen;
     private Button clearButton; //C button
     private Button numberButton;
-    Screen model;
+    String screenResult;
+
    // private TextView winnerPlayerLabel;
 
     CalculatorPresenter presenter = new CalculatorPresenter(this);
 
     //private ActivityMainBinding binding;
-
-    private static final char ADDITION = '+';
-    private static final char SUBTRACTION = '-';
-    private static final char MULTIPLICATION = '*';
-    private static final char DIVISION = '/';
-    private static final char DECIMAL = '.';
-    private static final String NEGATIVE = "*-1";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,16 +87,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         Button button = (Button) v;
         String tag = button.getTag().toString();
 
-        Log.i(TAG, "Tag name:" + tag);
-        if(tag.startsWith("number"))
-        {
-         //   model.num1.append(); //combine the numbers and make it a screen
-          //  View.textbox.refresh(); //refresh the screen results
-        }else if( tag.startsWith("operator"))
-        {
-          //  model.runCalculations();
-        }
-        presenter.onButtonSelected(tag);
+
+        Log.i(TAG, "Button clicked:" + tag);
+        screenResult =  presenter.decodeAndCalculate(tag);
+
+        this.showCalculations(screenResult);
 
     }
 
@@ -115,22 +103,25 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         }
     }
 
-    //clear screen when press C
+    //clear screen when press Reset
     public void clearScreen() {
-        Log.i("TAG2","Here2");
-        resultScreen.setVisibility(View.VISIBLE);
+        Log.i("TAG2","Reset Screen");
+
         resultScreen.setText("0");
+        resultScreen.setVisibility(View.VISIBLE);
     }
 
-
-    public void showCalculations(String winningPlayerDisplayLabel) {
-       // winnerPlayerLabel.setText(winningPlayerDisplayLabel);
-        CalculationResults.setVisibility(View.VISIBLE);
+    //display number in the screen
+    public void showCalculations(String calculationsResult) {
+        resultScreen.setText(calculationsResult);
+        resultScreen.setVisibility(View.VISIBLE);
     }
-
 
     public void clearWinnerDisplay() {
         //CalculationResults.setVisibility(View.GONE);
         //winnerPlayerLabel.setText("");
+    }
+    public void refreshScreen(){
+        resultScreen.refreshDrawableState();
     }
 }

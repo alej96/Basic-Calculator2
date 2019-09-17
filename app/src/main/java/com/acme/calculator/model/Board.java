@@ -4,9 +4,9 @@ public class Board {
 
     private Cell[][] cells = new Cell[3][3];
 
-    private Player winner;
+    private State winner;
     private GameState state;
-    private Player currentTurn;
+    private State currentTurn;
 
     private enum GameState { IN_PROGRESS, FINISHED };
 
@@ -20,7 +20,7 @@ public class Board {
     public void restart() {
         clearCells();
         winner = null;
-        currentTurn = Player.X;
+        currentTurn = State.op1State;
         state = GameState.IN_PROGRESS;
     }
 
@@ -34,14 +34,14 @@ public class Board {
      * @return the player that moved or null if we did not move anything.
      *
      */
-    public Player mark( int row, int col ) {
+    public State mark(int row, int col ) {
 
-        Player playerThatMoved = null;
+        State stateThatMoved = null;
 
         if(isValid(row, col)) {
 
             cells[row][col].setValue(currentTurn);
-            playerThatMoved = currentTurn;
+            stateThatMoved = currentTurn;
 
             if(isWinningMoveByPlayer(currentTurn, row, col)) {
                 state = GameState.FINISHED;
@@ -53,10 +53,10 @@ public class Board {
             }
         }
 
-        return playerThatMoved;
+        return stateThatMoved;
     }
 
-    public Player getWinner() {
+    public State getWinner() {
         return winner;
     }
 
@@ -91,32 +91,32 @@ public class Board {
 
     /**
      * Algorithm adapted from http://www.ntu.edu.sg/home/ehchua/programming/java/JavaGame_TicTacToe.html
-     * @param player
+     * @param state
      * @param currentRow
      * @param currentCol
-     * @return true if <code>player</code> who just played the move at the <code>currentRow</code>, <code>currentCol</code>
+     * @return true if <code>state</code> who just played the move at the <code>currentRow</code>, <code>currentCol</code>
      *              has a tic tac toe.
      */
-    private boolean isWinningMoveByPlayer(Player player, int currentRow, int currentCol) {
+    private boolean isWinningMoveByPlayer(State state, int currentRow, int currentCol) {
 
-        return (cells[currentRow][0].getValue() == player         // 3-in-the-row
-                && cells[currentRow][1].getValue() == player
-                && cells[currentRow][2].getValue() == player
-                || cells[0][currentCol].getValue() == player      // 3-in-the-column
-                && cells[1][currentCol].getValue() == player
-                && cells[2][currentCol].getValue() == player
+        return (cells[currentRow][0].getValue() == state         // 3-in-the-row
+                && cells[currentRow][1].getValue() == state
+                && cells[currentRow][2].getValue() == state
+                || cells[0][currentCol].getValue() == state      // 3-in-the-column
+                && cells[1][currentCol].getValue() == state
+                && cells[2][currentCol].getValue() == state
                 || currentRow == currentCol            // 3-in-the-diagonal
-                && cells[0][0].getValue() == player
-                && cells[1][1].getValue() == player
-                && cells[2][2].getValue() == player
+                && cells[0][0].getValue() == state
+                && cells[1][1].getValue() == state
+                && cells[2][2].getValue() == state
                 || currentRow + currentCol == 2    // 3-in-the-opposite-diagonal
-                && cells[0][2].getValue() == player
-                && cells[1][1].getValue() == player
-                && cells[2][0].getValue() == player);
+                && cells[0][2].getValue() == state
+                && cells[1][1].getValue() == state
+                && cells[2][0].getValue() == state);
     }
 
     private void flipCurrentTurn() {
-        currentTurn = currentTurn == Player.X ? Player.O : Player.X;
+        currentTurn = currentTurn == State.op1State ? State.op2State : State.op1State;
     }
 
 }

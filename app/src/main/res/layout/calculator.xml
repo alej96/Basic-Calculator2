@@ -108,6 +108,7 @@
             android:id="@+id/numberOne"
             style="@style/calculatorbutton"
             android:onClick="onCellClicked"
+            android:tag="number1"
             android:text="@string/oneButton" />
 
         <Button
@@ -137,7 +138,7 @@
         <Button
             style="@style/calculatorbutton"
             android:onClick="onCellClicked"
-            android:tag="operator."
+            android:tag="number."
             android:text="@string/decimalButton" />
 
         <Button
