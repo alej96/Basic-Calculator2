@@ -1,6 +1,7 @@
 package com.acme.calculator.model;
 
 import android.util.Log;
+import java.text.DecimalFormat;
 
 import com.acme.calculator.view.CalculatorActivity;
 
@@ -29,6 +30,8 @@ public class Screen {
     private static final String BACKSLASH = "BackSlash";
     private static final String C = "C";
 
+    DecimalFormat roundF = new DecimalFormat("##.00000");
+
 
 
     public Screen() {
@@ -51,9 +54,8 @@ public class Screen {
     public String decodeNumber(String tag){
 
         decoded =  tag.substring(6);
-       // number1 =  Double.parseDouble(decoded);
-      // this.appendNumbers(decoded);
         fullFormula = fullFormula + decoded;
+
 
        return  decoded;
     }
@@ -72,14 +74,7 @@ public class Screen {
 
     public String appendNumbers(String num){
 
-        //count the number of time I have pressed .
-//        for(int i = 0 ; i < fullNum.length(); i++){
-//           if(fullNum.charAt(i) == (DECIMAL)){
-//               counterDecimal++;
-//           }
-
-
-        if(!fullNum.contains(DECIMAL) || !num.equals(DECIMAL)) {
+         if(!fullNum.contains(DECIMAL) || !num.equals(DECIMAL)) {
 
             if((! num.equals(NEGATIVE))) {
 
@@ -88,12 +83,20 @@ public class Screen {
 
 
             }else{
+                try{
+                    number1 =  Double.parseDouble(fullNum) * -1;
+                    fullNum = Double.toString(number1);
+                }catch (Exception e){
+                    Log.i(TAG, "Debug: Error! The first input should be a number, " +
+                             "not the negative ->" + e);
+                    fullNum = "";
+                    fullFormula = "";
+                }
 
-                number1 =  Double.parseDouble(fullNum) * -1;
-                fullNum = Double.toString(number1);
+
             }
-
-            Log.i(TAG, "Debug append numbers -> decoded: " + decoded + " number1: " + number1 + "num2: " + number2 + " full num: " + fullNum );
+            Log.i(TAG, "Debug append numbers -> decoded: " + decoded + " number1: " + number1
+                    + " num2: " + number2 + " full num: " + fullNum );
         }
 
 
@@ -103,35 +106,28 @@ public class Screen {
 
     public String runCalculations(){
 
-        //operants = this.decodeOperator(tag);
-//            if(operationsCounter < 1)
-//            {
-//                number2 = number1;
-//            }
-//            if ((operants.equals(EQUAL))) {
-//                num2Turn = true;
-//                num1Turn = true;
-//            }
-
-           // if(num1Turn == true && num2Turn == true) {
                 if (operants.equals(ADDITION)) {
                     result = number2 + number1;
                     Log.i(TAG, "Calculation Debug : Addition: " + number2 + " " + operants + " " + number1 + " = " + result);
                 } else if (operants.equals(SUBTRACTION)) {
-                    Log.i(TAG, "Calculation Debug : Substraction: " + number2 + " " + operants + " " + number1 + " = " + result);
+                    Log.i(TAG, "Calculation Debug : Subtraction: " + number2 + " " + operants + " " + number1 + " = " + result);
                     result = number2 - number1;
                 } else if (operants.equals(MULTIPLICATION)) {
                     result = number2 * number1;
-                    Log.i(TAG, "Calculation Debug : Multiplicaion: " + number2 + " " + operants + " " + number1 + " = " + result);
+                    Log.i(TAG, "Calculation Debug : Multiplication: " + number2 + " " + operants + " " + number1 + " = " + result);
                 } else if (operants.equals(DIVISION)) {
                     result = number2 / number1;
                     Log.i(TAG, "Calculation Debug : Division: " + number2 + " " + operants + " " + number1 + " = " + result);
-                } /*else if ((operants.equals(NEGATIVE))) {
-                    result = number1 * -1;
-                    Log.i(TAG, "Calculation Debug : Change to -/+: " + number2 + " " + operants + " " + number1 + " = " + result);
+                } else{
 
-                }*/
-           // }
+                    //if you press = before any operants are pressed
+                    return Double.toString(number2);
+                }
+
+
+        result = Double.parseDouble(roundF.format(result));
+        Math.round(result);
+
             number2 = result;
             number1 = 0;
             fullNum = "";
@@ -147,9 +143,18 @@ public class Screen {
         command = this.decodeCommand(tag);
          if(command.equals(BACKSLASH)){
 
-             fullNum = removeLastChar(fullNum);
-             fullFormula =  removeLastChar(fullFormula);
-             number1 = Double.parseDouble(fullNum);
+             try {
+                 //  Block of code to try
+                 fullNum = removeLastChar(fullNum);
+                 fullFormula =  removeLastChar(fullFormula);
+                 number1 = Double.parseDouble(fullNum);
+             }
+             catch(Exception e) {
+                 //  Block of code to handle errors
+                 Log.i(TAG, "Debug: Empty String when you try to delete the last character" + e);
+                 fullFormula = "";
+             }
+
 
             Log.i(TAG , "Debug BackLashed num: " +
              " number1: " + number1 + "num2: " + number2 + " full num: " + fullNum );
@@ -160,7 +165,7 @@ public class Screen {
         }else if (command.equals(EQUAL)){
 
             fullNum = this.runCalculations();
-             fullFormula = fullFormula  + EQUAL + result;
+             fullFormula = fullFormula  + EQUAL + fullNum;
 
          }
 
@@ -188,8 +193,12 @@ public class Screen {
 
     }
     public void InitialState(String num){
-
-        number2 = Double.parseDouble(num);
+        try {
+            number2 = Double.parseDouble(num);
+        }catch (Exception e){
+            Log.i(TAG, "" + e);
+            number2 = 0;
+        }
         number1 = 0;
         operants = "";
         Log.i(TAG, "Debug Intial State:  num2:  " + number2);

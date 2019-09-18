@@ -12,21 +12,33 @@
     android:gravity="center_horizontal"
     tools:context="com.acme.calculator.view.CalculatorActivity">
 
+    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+    </HorizontalScrollView>
+
 
     <TextView
         android:id="@+id/calculationFormula"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:visibility="visible"
         tools:text=""
         android:gravity = "right"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+
+        />
     <TextView
         android:id="@+id/calculationResults"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:visibility="visible"
         tools:text="0"
         android:gravity = "right"

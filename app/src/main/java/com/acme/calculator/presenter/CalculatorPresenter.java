@@ -135,8 +135,8 @@ public class CalculatorPresenter implements Presenter {
                 model.EqualState();
                 currentState = equalState;
             }else if(tag.equals("commandC")){
-
-                model.InitialState(toDisplayScreen);
+                currentState = initialState;
+               // model.InitialState(toDisplayScreen);
               }
             return toDisplayScreen;
         }
