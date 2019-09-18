@@ -75,6 +75,7 @@ public class CalculatorPresenter implements Presenter {
             toDisplayScreen =  model.decodeNumber(tag);
             toDisplayScreen = model.appendNumbers(toDisplayScreen);
 
+
             switch (currentState) {
                 case initialState:
 
