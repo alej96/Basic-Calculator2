@@ -14,6 +14,15 @@
 
 
     <TextView
+        android:id="@+id/calculationFormula"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:visibility="visible"
+        tools:text=""
+        android:gravity = "right"
+        tools:visibility="visible" />
+    <TextView
         android:id="@+id/calculationResults"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -41,7 +50,7 @@
         <Button
             style="@style/calculatorbutton"
             android:onClick="onCellClicked"
-            android:tag="operator*-1"
+            android:tag="number*-1"
             android:text="@string/plusMinusButton" />
 
         <Button
@@ -144,7 +153,7 @@
         <Button
             style="@style/calculatorbutton"
             android:onClick="onCellClicked"
-            android:tag="operator="
+            android:tag="command="
             android:text="@string/equalButton" />
 
 

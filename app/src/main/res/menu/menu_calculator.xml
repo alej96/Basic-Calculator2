@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.CalculatorActivity">
 
-    <item android:id="@+id/action_reset"
-        android:title="@string/action_reset"
-        android:orderInCategory="100"
-        app:showAsAction="ifRoom" />
+<!--    <item android:id="@+id/action_reset"-->
+<!--        android:title="@string/action_reset"-->
+<!--        android:orderInCategory="100"-->
+<!--        app:showAsAction="ifRoom" />-->
 
 </menu>

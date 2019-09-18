@@ -16,8 +16,8 @@ public class Screen {
     String decoded;
     String fullNum;
     String tempNum;
+    String fullFormula;
 
-    int operationsCounter;
 
     private static final String ADDITION = "+";
     private static final String SUBTRACTION = "-";
@@ -29,9 +29,6 @@ public class Screen {
     private static final String BACKSLASH = "BackSlash";
     private static final String C = "C";
 
-    //turns
-    boolean num1Turn;
-    boolean num2Turn;
 
 
     public Screen() {
@@ -47,9 +44,7 @@ public class Screen {
         decoded = "";
         tempNum = "";
         command = "";
-        num1Turn = false;
-        num2Turn = false;
-        operationsCounter = 0;
+        fullFormula = "";
     }
 
 
@@ -58,13 +53,14 @@ public class Screen {
         decoded =  tag.substring(6);
        // number1 =  Double.parseDouble(decoded);
       // this.appendNumbers(decoded);
-        num1Turn = true;
+        fullFormula = fullFormula + decoded;
 
        return  decoded;
     }
     public String decodeOperator(String tag){
 
         operants =  tag.substring(8);
+        fullFormula = fullFormula  + operants;
         return operants;
     }
 
@@ -75,7 +71,6 @@ public class Screen {
     }
 
     public String appendNumbers(String num){
-        Log.i(TAG , "===BEFORE=== append: " + decoded + " number1: " + number1 +" full num: " + fullNum );
 
         //count the number of time I have pressed .
 //        for(int i = 0 ; i < fullNum.length(); i++){
@@ -85,9 +80,20 @@ public class Screen {
 
 
         if(!fullNum.contains(DECIMAL) || !num.equals(DECIMAL)) {
-            fullNum = fullNum + num;
-            number1 = Double.parseDouble(fullNum);
-            Log.i(TAG, "append numbers: " + decoded + " number1: " + number1 + " full num: " + fullNum);
+
+            if((! num.equals(NEGATIVE))) {
+
+                fullNum = fullNum + num;
+                number1 = Double.parseDouble(fullNum);
+
+
+            }else{
+
+                number1 =  Double.parseDouble(fullNum) * -1;
+                fullNum = Double.toString(number1);
+            }
+
+            Log.i(TAG, "Debug append numbers -> decoded: " + decoded + " number1: " + number1 + "num2: " + number2 + " full num: " + fullNum );
         }
 
 
@@ -95,9 +101,9 @@ public class Screen {
         return fullNum;
     }
 
-    public String runCalculations(String tag){
+    public String runCalculations(){
 
-        operants = this.decodeOperator(tag);
+        //operants = this.decodeOperator(tag);
 //            if(operationsCounter < 1)
 //            {
 //                number2 = number1;
@@ -120,17 +126,15 @@ public class Screen {
                 } else if (operants.equals(DIVISION)) {
                     result = number2 / number1;
                     Log.i(TAG, "Calculation Debug : Division: " + number2 + " " + operants + " " + number1 + " = " + result);
-                } else if ((operants.equals(NEGATIVE))) {
-                    result = number2 * -1;
+                } /*else if ((operants.equals(NEGATIVE))) {
+                    result = number1 * -1;
                     Log.i(TAG, "Calculation Debug : Change to -/+: " + number2 + " " + operants + " " + number1 + " = " + result);
 
-                }
+                }*/
            // }
             number2 = result;
             number1 = 0;
             fullNum = "";
-            num2Turn = false;
-            operationsCounter++;
 
         return Double.toString(result);
     }
@@ -143,40 +147,71 @@ public class Screen {
         command = this.decodeCommand(tag);
          if(command.equals(BACKSLASH)){
 
-                 fullNum = removeLastChar(fullNum);
+             fullNum = removeLastChar(fullNum);
+             fullFormula =  removeLastChar(fullFormula);
+             number1 = Double.parseDouble(fullNum);
 
-
-            Log.i(TAG , "BackLashed num: " + fullNum);
+            Log.i(TAG , "Debug BackLashed num: " +
+             " number1: " + number1 + "num2: " + number2 + " full num: " + fullNum );
         }
         else if(command.equals(C)) {
             this.restart();
             return "0";
         }else if (command.equals(EQUAL)){
-            return fullNum;
+
+            fullNum = this.runCalculations();
+             fullFormula = fullFormula  + EQUAL + result;
+
          }
 
          return fullNum;
 
     }
-    public String num1State(String num){
+    public void stateAddNum_1_Only(String num){
 
-        number2 = 0;
-        operants = "";
+       // number2 = 0;
+       // operants = "";
         number1 = Double.parseDouble(num);
-        return num;
+
     }
     public String num2State(String num){
-       num = runCalculations(num);
+       num = runCalculations();
 
        return num;
     }
     public void EqualState(){
 
+        number1 = 0;
+        operants = "";
+        fullNum = "";
+
 
     }
-    public void InitialState(){
+    public void InitialState(String num){
 
+        number2 = Double.parseDouble(num);
+        number1 = 0;
+        operants = "";
+        Log.i(TAG, "Debug Intial State:  num2:  " + number2);
+    }
 
+    public void saveOperationState(String opTag){
+
+        operants = decodeOperator(opTag);
+        number1 = 0;
+        fullNum = "";
+
+    }
+
+    public void stateAddOperator(String tag){
+        operants = this.decodeOperator(tag);
+    }
+    public String combineFormulas(){
+
+        return fullFormula;
+    }
+    public void  resetFormula(){
+        fullFormula = "";
     }
 }
 

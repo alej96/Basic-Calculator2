@@ -23,11 +23,12 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
 
     private ViewGroup buttonGrid;
-    private View CalculationResults;
+    private TextView calculationFormula;
     private TextView resultScreen;
     private Button clearButton; //C button
     private Button numberButton;
     String screenResult;
+    String formulaCalcualtions;
 
    // private TextView winnerPlayerLabel;
 
@@ -37,13 +38,14 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("Tag1","here");
+        Log.i("Tag1","Debug here OnCreate()");
       //  resultScreen.setVisibility(View.VISIBLE);
         setContentView(R.layout.calculator);
 //        winnerPlayerLabel = (TextView) findViewById(R.id.calculationResults);
         resultScreen = (TextView) findViewById(R.id.calculationResults); //display the calcualtions in the screen
         buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
-        clearButton = (Button) findViewById(R.id.action_reset);
+       // clearButton = (Button) findViewById(R.id.action_reset);
+        calculationFormula = (TextView)findViewById(R.id.calculationFormula);
         presenter.onCreate();
     }
 
@@ -71,16 +73,16 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         inflater.inflate(R.menu.menu_calculator, menu);
         return true;
     }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_reset:
-                presenter.onResetSelected();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_reset:
+//                presenter.onResetSelected();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     public void onCellClicked(View v) {
     //do a if statement to recognize if it a number or operant
@@ -88,10 +90,12 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         String tag = button.getTag().toString();
 
 
-        Log.i(TAG, "Button clicked:" + tag);
+        Log.i(TAG, "Debug Button clicked:" + tag);
         screenResult =  presenter.decodeAndCalculate(tag);
+        formulaCalcualtions = presenter.getFormula();
 
         this.showCalculations(screenResult);
+       this.displayFormula(formulaCalcualtions);
 
     }
 
@@ -105,7 +109,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     //clear screen when press Reset
     public void clearScreen() {
-        Log.i("TAG2","Reset Screen");
+        Log.i("TAG2","Debug Reset Screen");
 
         resultScreen.setText("0");
         resultScreen.setVisibility(View.VISIBLE);
@@ -123,5 +127,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     }
     public void refreshScreen(){
         resultScreen.refreshDrawableState();
+    }
+    public void displayFormula(String formula){
+        calculationFormula.setText(formula);
+        calculationFormula.setVisibility(View.VISIBLE);
     }
 }
