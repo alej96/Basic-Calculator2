@@ -106,6 +106,7 @@ public class Screen {
         return fullNum;
     }
 
+    //Calculate values
     public String runCalculations(){
 
                 if (operants.equals(ADDITION)) {
@@ -164,7 +165,6 @@ public class Screen {
 
             fullNum = this.runCalculations();
              fullFormula = fullFormula  + EQUAL + fullNum;
-
          }
 
          return fullNum;
@@ -180,11 +180,8 @@ public class Screen {
 
 
 }
-    public String num2State(String num){
-       num = runCalculations();
 
-       return num;
-    }
+//Change the states of the calculator: initial, calculate, wait for second operator
     public void EqualState(){
         try {
             number1 = 0;

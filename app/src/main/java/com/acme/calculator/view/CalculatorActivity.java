@@ -1,12 +1,11 @@
 package com.acme.calculator.view;
 
-//import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -73,8 +72,9 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         return true;
     }
 
+    //When a button is clicked, display on screen (number, or calculations)
     public void onCellClicked(View v) {
-    //do a if statement to recognize if it a number or operant
+
         Button button = (Button) v;
         String tag = button.getTag().toString();
 
@@ -116,9 +116,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         resultScreen.setVisibility(View.VISIBLE);
     }
 
-    public void refreshScreen(){
-        resultScreen.refreshDrawableState();
-    }
     public void displayFormula(String formula){
 
         if(helper.equals("NaN")){

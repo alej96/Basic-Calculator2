@@ -15,11 +15,8 @@ public class CalculatorPresenter implements Presenter {
 
     private CalculatorView view;
     private Screen model;
-    String num1;
-    String num2;
-    String operation;
+
     String toDisplayScreen;
-    String helperToDisplay ;
     State currentState;
     String fullFormula;
 
