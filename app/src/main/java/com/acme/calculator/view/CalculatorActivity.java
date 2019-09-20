@@ -41,10 +41,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
         setContentView(R.layout.calculator);
 
-        resultScreen = (TextView) findViewById(R.id.calculationResults); //display the calcualtions in the screen
-        buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
+        resultScreen = findViewById(R.id.calculationResults); //display the calcualtions in the screen
+        buttonGrid = findViewById(R.id.buttonGrid);
 
-        calculationFormula = (TextView)findViewById(R.id.calculationFormula);
+        calculationFormula = findViewById(R.id.calculationFormula);
         presenter.onCreate();
     }
 
@@ -90,7 +90,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     @Override
     public void setButtonText(int row, int col, String text) {
-        Button btn = (Button) buttonGrid.findViewWithTag("" + row + col);
+        Button btn = buttonGrid.findViewWithTag("" + row + col);
         if(btn != null) {
             btn.setText(text);
         }
@@ -110,6 +110,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         if(calculationsResult.equals("")){
             calculationsResult = "0";
         }
+
 
         resultScreen.setText(calculationsResult);
         resultScreen.setVisibility(View.VISIBLE);
