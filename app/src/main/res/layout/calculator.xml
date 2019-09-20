@@ -23,7 +23,7 @@
         android:id="@+id/calculationFormula"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:visibility="visible"
         tools:text=""
         android:gravity = "right"
@@ -34,14 +34,15 @@
         android:focusableInTouchMode="true"
 
         />
+
     <TextView
         android:id="@+id/calculationResults"
-        android:layout_width="300dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:textSize="35sp"
+        android:gravity="right"
+        android:textSize="32sp"
         android:visibility="visible"
         tools:text="0"
-        android:gravity = "right"
         tools:visibility="visible" />
 
     <GridLayout

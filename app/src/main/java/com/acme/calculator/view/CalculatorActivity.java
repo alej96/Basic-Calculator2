@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.acme.calculator.R;
 import com.acme.calculator.presenter.CalculatorPresenter;
-import com.acme.calculator.model.Screen;
-//import com.acme.calculator.databinding.ActivityMainBinding;
+
+
 
 public class CalculatorActivity extends AppCompatActivity implements CalculatorView {
 
@@ -25,26 +25,24 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
     private ViewGroup buttonGrid;
     private TextView calculationFormula;
     private TextView resultScreen;
-    private Button clearButton; //C button
-    private Button numberButton;
+
     String screenResult;
     String formulaCalcualtions;
 
-   // private TextView winnerPlayerLabel;
+
 
     CalculatorPresenter presenter = new CalculatorPresenter(this);
 
-    //private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("Tag1","Debug here OnCreate()");
-      //  resultScreen.setVisibility(View.VISIBLE);
+
         setContentView(R.layout.calculator);
-//        winnerPlayerLabel = (TextView) findViewById(R.id.calculationResults);
+
         resultScreen = (TextView) findViewById(R.id.calculationResults); //display the calcualtions in the screen
         buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
-       // clearButton = (Button) findViewById(R.id.action_reset);
+
         calculationFormula = (TextView)findViewById(R.id.calculationFormula);
         presenter.onCreate();
     }
@@ -73,16 +71,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         inflater.inflate(R.menu.menu_calculator, menu);
         return true;
     }
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_reset:
-//                presenter.onResetSelected();
-//                return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
 
     public void onCellClicked(View v) {
     //do a if statement to recognize if it a number or operant
@@ -121,10 +109,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         resultScreen.setVisibility(View.VISIBLE);
     }
 
-    public void clearWinnerDisplay() {
-        //CalculationResults.setVisibility(View.GONE);
-        //winnerPlayerLabel.setText("");
-    }
     public void refreshScreen(){
         resultScreen.refreshDrawableState();
     }

@@ -30,8 +30,6 @@ public class Screen {
     private static final String BACKSLASH = "BackSlash";
     private static final String C = "C";
 
-    DecimalFormat roundF = new DecimalFormat("##.00000");
-
 
 
     public Screen() {
@@ -78,8 +76,12 @@ public class Screen {
 
             if((! num.equals(NEGATIVE))) {
 
-                fullNum = fullNum + num;
-                number1 = Double.parseDouble(fullNum);
+                try {
+                    fullNum = fullNum + num;
+                    number1 = Double.parseDouble(fullNum);
+                }catch(Exception e){
+                    Log.i(TAG, "Debug: Error!->" + e);
+                }
 
 
             }else{
@@ -119,14 +121,10 @@ public class Screen {
                     result = number2 / number1;
                     Log.i(TAG, "Calculation Debug : Division: " + number2 + " " + operants + " " + number1 + " = " + result);
                 } else{
-
                     //if you press = before any operants are pressed
                     return Double.toString(number2);
                 }
 
-
-        result = Double.parseDouble(roundF.format(result));
-        Math.round(result);
 
             number2 = result;
             number1 = 0;
@@ -173,22 +171,29 @@ public class Screen {
 
     }
     public void stateAddNum_1_Only(String num){
+        try {
+            number1 = Double.parseDouble(num);
+        } catch(Exception e){
+            Log.i(TAG, "Debug" + e);
+        }
 
-       // number2 = 0;
-       // operants = "";
-        number1 = Double.parseDouble(num);
 
-    }
+
+}
     public String num2State(String num){
        num = runCalculations();
 
        return num;
     }
     public void EqualState(){
+        try {
+            number1 = 0;
+            operants = "";
+            fullNum = "";
+        }catch(Exception e){
+            Log.i(TAG, "Debug" + e);
+        }
 
-        number1 = 0;
-        operants = "";
-        fullNum = "";
 
 
     }
@@ -198,6 +203,9 @@ public class Screen {
         }catch (Exception e){
             Log.i(TAG, "" + e);
             number2 = 0;
+            if(num.equals(DECIMAL)){
+                number2 = 0;
+            }
         }
         number1 = 0;
         operants = "";
@@ -206,15 +214,17 @@ public class Screen {
 
     public void saveOperationState(String opTag){
 
-        operants = decodeOperator(opTag);
-        number1 = 0;
-        fullNum = "";
+        try {
+
+            operants = decodeOperator(opTag);
+            number1 = 0;
+            fullNum = "";
+        }catch(Exception e){
+            Log.i(TAG, "Debug: " + e);
+        }
 
     }
 
-    public void stateAddOperator(String tag){
-        operants = this.decodeOperator(tag);
-    }
     public String combineFormulas(){
 
         return fullFormula;

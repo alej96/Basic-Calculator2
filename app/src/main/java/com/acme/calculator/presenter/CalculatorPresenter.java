@@ -6,7 +6,6 @@ import com.acme.calculator.model.State;
 import static com.acme.calculator.model.State.equalState;
 import static com.acme.calculator.model.State.initialState;
 import static com.acme.calculator.model.State.op1State;
-import static com.acme.calculator.model.State.op2State;
 import static com.acme.calculator.model.State.saveOperationState;
 import static com.acme.calculator.model.State.runCalculationsState;
 
@@ -50,20 +49,11 @@ public class CalculatorPresenter implements Presenter {
 
     }
 
-    //this pesudo code...operads
-
     public String decodeAndCalculate(String tag) {
 
         //do all calculations (funtion from model and display number/operant in screen!
-
         if(tag.startsWith("number"))
         {
-              // model.num1.append(); //combine the numbers and make it a screen
-            // View.textbox.refresh(); //refresh the screen results
-
-
-
-
             if(currentState == saveOperationState){
                 currentState = op1State;
             }
@@ -85,13 +75,7 @@ public class CalculatorPresenter implements Presenter {
                 case op1State:
 
                     model.stateAddNum_1_Only(toDisplayScreen);
-                   // view.showCalculations(toDisplayScreen);  //dont thiks this it necessary
                     break;
-
-//                case runCalculationsState:
-//                    toDisplayScreen = model.runCalculations(tag);
-//                    break;
-
 
             }
             return toDisplayScreen;
@@ -107,16 +91,7 @@ public class CalculatorPresenter implements Presenter {
             }
 
             switch (currentState) {
-//                case op1State:
-//                    model.stateAddOperator(tag);
-//                    currentState = op2State;
-//                    toDisplayScreen = "";
-//                    break;
                 case saveOperationState:
-                   // toDisplayScreen = model.runCalculations(tag);
-                    //helperToDisplay = toDisplayScreen;
-                   // toDisplayScreen = "";
-
                     model.saveOperationState(tag);
 
                      break;
@@ -136,7 +111,6 @@ public class CalculatorPresenter implements Presenter {
                 currentState = equalState;
             }else if(tag.equals("commandC")){
                 currentState = initialState;
-               // model.InitialState(toDisplayScreen);
               }
             return toDisplayScreen;
         }
@@ -145,20 +119,10 @@ public class CalculatorPresenter implements Presenter {
 
     }
 
-    public void onResetSelected() {
-     //   view.clearWinnerDisplay();
-        view.clearScreen();
-        model.restart();
-    }
     public String getFormula(){
 
         fullFormula = model.combineFormulas();
         return fullFormula;
     }
-    public  void getCurrentState(State cState){
-        currentState = cState;
-    }
-   // public enum State { op1State , op2State, equalsState }
-
 
 }
