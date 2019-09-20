@@ -28,6 +28,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     String screenResult;
     String formulaCalcualtions;
+    public String helper;
 
 
 
@@ -105,6 +106,11 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     //display number in the screen
     public void showCalculations(String calculationsResult) {
+        helper = calculationsResult;
+        if(calculationsResult.equals("")){
+            calculationsResult = "0";
+        }
+
         resultScreen.setText(calculationsResult);
         resultScreen.setVisibility(View.VISIBLE);
     }
@@ -113,6 +119,10 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         resultScreen.refreshDrawableState();
     }
     public void displayFormula(String formula){
+
+        if(helper.equals("NaN")){
+            formula = "Error! Please reset Calculator";
+        }
         calculationFormula.setText(formula);
         calculationFormula.setVisibility(View.VISIBLE);
     }
